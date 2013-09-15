@@ -66,11 +66,120 @@ class Treasure extends MX_Controller {
 			$this->load->view('templates/mainnav', $data);
 			$this->load->view('treasure');
 			$this->load->view('templates/footer');
-		}
-		
-
+		}	
 	}
-	
+	function leaderboard()
+	{
+		$data['title'] = 'Adwaita 2013 Treasure hunt';
+		//$data['page'] = 'home';
+		$this->lang->load('tank_auth');
+		$this->load->library('tank_auth_groups','','tank_auth');
+		if ($this->tank_auth->is_logged_in())
+		{									// logged in
+			$data['user_id']=$this->tank_auth->get_user_id();
+			$data['user_name']=$this->tank_auth->get_username();
+			$data['is_logged_in']=TRUE;
+
+		} 
+		elseif ($this->tank_auth->is_logged_in(FALSE)) 
+		{						// logged in, not activated
+			redirect('/auth/send_again/');
+
+		} 
+		else 
+		{
+			$data['is_logged_in']=FALSE;
+			redirect('auth/login');
+		}
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/mainnav', $data);
+		$this->load->view('leader_board.php');
+		$this->load->view('templates/footer');
+	}
+	function rules()
+	{
+		$data['title'] = 'Adwaita 2013 Treasure hunt';
+		//$data['page'] = 'home';
+		$this->lang->load('tank_auth');
+		$this->load->library('tank_auth_groups','','tank_auth');
+		if ($this->tank_auth->is_logged_in())
+		{									// logged in
+			$data['user_id']=$this->tank_auth->get_user_id();
+			$data['user_name']=$this->tank_auth->get_username();
+			$data['is_logged_in']=TRUE;
+
+		} 
+		elseif ($this->tank_auth->is_logged_in(FALSE)) 
+		{						// logged in, not activated
+			redirect('/auth/send_again/');
+
+		} 
+		else 
+		{
+			$data['is_logged_in']=FALSE;
+			redirect('auth/login');
+		}
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/mainnav', $data);
+		$this->load->view('rules.php');
+		$this->load->view('templates/footer');
+	}
+	function forum()
+	{
+		$data['title'] = 'Adwaita 2013 Treasure hunt';
+		//$data['page'] = 'home';
+		$this->lang->load('tank_auth');
+		$this->load->library('tank_auth_groups','','tank_auth');
+		if ($this->tank_auth->is_logged_in())
+		{									// logged in
+			$data['user_id']=$this->tank_auth->get_user_id();
+			$data['user_name']=$this->tank_auth->get_username();
+			$data['is_logged_in']=TRUE;
+
+		} 
+		elseif ($this->tank_auth->is_logged_in(FALSE)) 
+		{						// logged in, not activated
+			redirect('/auth/send_again/');
+
+		} 
+		else 
+		{
+			$data['is_logged_in']=FALSE;
+			redirect('auth/login');
+		}
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/mainnav', $data);
+		$this->load->view('forum.php');
+		$this->load->view('templates/footer');
+	}
+	function halloffame()
+	{
+		$data['title'] = 'Adwaita 2013 Treasure hunt';
+		//$data['page'] = 'home';
+		$this->lang->load('tank_auth');
+		$this->load->library('tank_auth_groups','','tank_auth');
+		if ($this->tank_auth->is_logged_in())
+		{									// logged in
+			$data['user_id']=$this->tank_auth->get_user_id();
+			$data['user_name']=$this->tank_auth->get_username();
+			$data['is_logged_in']=TRUE;
+
+		} 
+		elseif ($this->tank_auth->is_logged_in(FALSE)) 
+		{						// logged in, not activated
+			redirect('/auth/send_again/');
+
+		} 
+		else 
+		{
+			$data['is_logged_in']=FALSE;
+			redirect('auth/login');
+		}
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/mainnav', $data);
+		$this->load->view('hall_of_fame.php');
+		$this->load->view('templates/footer');
+	}
 }
 
 /* End of file welcome.php */

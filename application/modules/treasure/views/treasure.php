@@ -8,9 +8,9 @@
 	<div class="span8">
 		<?php
 			//$this->load->view('treasure/dash');
-			if(!$question[0])
+			if(!isset($question[0]))
 			{
-				echo "End of the level";
+				echo "<div class='alert alert-info'> End of the level wait till new levels are added </div>";
 			}
 			else
 			{
