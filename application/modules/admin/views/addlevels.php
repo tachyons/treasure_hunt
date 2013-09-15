@@ -12,7 +12,8 @@
                if(isset($error)) {echo $error;}
                $attributes = array('class' => 'form-horizontal', 'id' => 'addproperty');
                echo form_open_multipart('admin/addlevels', $attributes);
-               $this->form_builder->text('level', 'Level name', '');
+               $this->form_builder->text('level', 'Level number', '');
+               $this->form_builder->text('name', 'Level name', '');
                $this->form_builder->text('title', 'Title', '');
                $this->form_builder->textarea('description', 'Desription', '');
          ?>

@@ -38,10 +38,36 @@ class Treasure extends MX_Controller {
 		}
 		$data['level']=$this->treasure_model->get_user_level($data['user_id']);
 		$data['question']=$this->treasure_model->get_question($data['level']);
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/mainnav', $data);
-		$this->load->view('treasure');
-		$this->load->view('templates/footer');
+		if($_POST)
+		{
+		    $this->form_validation->set_rules('answer', 'Answer', 'trim|required|xss_clean');
+		    $this->form_validation->set_error_delimiters('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>');
+		    if($this->form_validation->run() == FALSE)
+		   	{
+		     	//Field validation failed.  
+		     	$this->load->view('templates/header', $data);
+				$this->load->view('templates/mainnav', $data);
+				$this->load->view('treasure');
+				$this->load->view('templates/footer');
+			}
+			else
+			{
+				$answer=sha1($this->input->post('answer'));
+				if($this->treasure_model->check_answer($answer,$data['level']))
+				{
+					$this->treasure_model->increment_level($data['user_id'],$data['level']);
+				}
+			}
+			redirect('treasure');
+		}
+		else
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/mainnav', $data);
+			$this->load->view('treasure');
+			$this->load->view('templates/footer');
+		}
+		
 
 	}
 	

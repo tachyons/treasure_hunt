@@ -65,8 +65,9 @@ class Admin extends MX_Controller {
 		if($_POST)
 		{
 			$this->load->library('form_validation');
-		    $this->form_validation->set_rules('title', 'District', 'trim|required|xss_clean');
+		    $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
 		    $this->form_validation->set_rules('level', 'Level', 'trim|required|xss_clean');
+		    $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
 		    $this->form_validation->set_rules('description', 'Description', 'trim|required|xss_clean');
 		    $this->form_validation->set_rules('answer', 'Answer', 'trim|required|xss_clean');
 		    $this->form_validation->set_rules('javascript', 'Title', 'trim|required|xss_clean');
@@ -74,7 +75,7 @@ class Admin extends MX_Controller {
 		    $this->form_validation->set_error_delimiters('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>');
 			if($this->form_validation->run() == FALSE)
 		   	{
-		     	//Field validation failed.  User redirected to login page
+		     	//Field validation failed.  
 		     	$this->load->view('templates/header', $data);
 				$this->load->view('templates/mainnav', $data);
 		     	$this->load->view('admin/addlevels');
@@ -82,16 +83,18 @@ class Admin extends MX_Controller {
 		   	}
 		   	else
 			{
-				$title=$district= $this->input->post('title');
-				$level=$district= $this->input->post('level');
-				$description=$district= $this->input->post('description');
-				$answer=$district= $this->input->post('answer');
-				$javascript=$district= $this->input->post('javascript');
-				$cookie=$district= $this->input->post('cookie');
+				$title= $this->input->post('title');
+				$level=$this->input->post('level');
+				$name=$this->input->post('name');
+				$description= $this->input->post('description');
+				$answer= sha1($this->input->post('answer'));
+				$javascript= $this->input->post('javascript');
+				$cookie=$this->input->post('cookie');
 				$photo= $_FILES["photo"]["name"];
 				$array = array(
 					"title" => "$title",
-					"name" => "$level",
+					"level" => "$level",
+					"name" => "$name",
 					"description" => "$description",
 					"answer" => "$answer",
 					"javascript" => "$javascript",
