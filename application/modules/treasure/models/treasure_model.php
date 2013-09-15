@@ -31,6 +31,7 @@ class Treasure_model extends CI_Model {
 		$this->db->where('level', $level+1);
 		$query = $this->db->get('levels');
 		$result=$query->result_array();
+		//echo $result[0]['answer']."  ".$answer;
 		if($result[0]['answer']==$answer)
 		{
 			return TRUE;
@@ -40,11 +41,11 @@ class Treasure_model extends CI_Model {
 			return FALSE;
 		}
 	}
-	function increment_level($user_id)
+	function increment_level($user_id,$level)
 	{
 		$data = array(
                'level' => $level+1,
-            );
+         );
 
 		$this->db->where('user_id', $user_id);
 		$this->db->update('user_profiles', $data); 
