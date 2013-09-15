@@ -9,4 +9,8 @@ class Admin_model extends CI_Model {
 	{
 		$this->db->insert('levels', $array);
 	}
+	function get_user_level($user_id)
+	{
+		
+	}
 }

@@ -639,6 +639,10 @@ class Tank_auth
 					$this->ci->config->item('login_attempt_expire', 'tank_auth'));
 		}
 	}
+	function get_user_level()
+	{
+		
+	}
 }
 
 /* End of file Tank_auth.php */

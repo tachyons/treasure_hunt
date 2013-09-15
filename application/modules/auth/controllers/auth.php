@@ -608,6 +608,7 @@ class Auth extends CI_Controller
 		}
 		return TRUE;
 	}
+	
 
 }
 

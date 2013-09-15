@@ -34,7 +34,10 @@ class Treasure extends MX_Controller {
 		else 
 		{
 			$data['is_logged_in']=FALSE;
+			redirect('auth/login');
 		}
+		$data['level']=$this->treasure_model->get_user_level($data['user_id']);
+		$data['question']=$this->treasure_model->get_question($data['level']);
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/mainnav', $data);
 		$this->load->view('treasure');
