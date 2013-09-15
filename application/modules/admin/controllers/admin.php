@@ -10,6 +10,7 @@ class Admin extends MX_Controller {
 		$this->lang->load('tank_auth');
 		$this->load->library('form_builder');
 		$this->load->model('admin_model');
+		$this->load->library('table');
 	}
 
 	public function index()
@@ -233,6 +234,33 @@ class Admin extends MX_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/mainnav', $data);
 		$this->load->view('hall_of_fame');
+		$this->load->view('templates/footer');
+
+	}
+	public function managelevels()
+	{
+
+		$data['title'] = 'Admin panel';
+		$data['page'] = 'home';
+		$this->lang->load('tank_auth');
+		$this->load->library('tank_auth_groups','','tank_auth');
+		if ($this->tank_auth->is_admin())
+		{								// logged in
+			$data['user_id']=$this->tank_auth->get_user_id();
+			$data['user_name']=$this->tank_auth->get_username();
+			$data['is_logged_in']=TRUE;
+
+		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+			redirect('/auth/send_again/');
+
+		} else {
+			$data['is_logged_in']=FALSE;
+			redirect('/home');
+		}
+		$data['levels']=$this->admin_model->get_levels();
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/mainnav', $data);
+		$this->load->view('manage_levels');
 		$this->load->view('templates/footer');
 
 	}

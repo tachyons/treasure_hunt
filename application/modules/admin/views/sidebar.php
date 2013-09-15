@@ -8,9 +8,10 @@
           <li <?php if ($item==4){ echo "class='active'";} ?>><a href="<?php echo base_url() ?>admin/halloffame"><i class="icon-envelope"></i> Hall of fame</a></li>
           <li <?php if ($item==5){ echo "class='active'";} ?>><a href="<?php echo base_url() ?>admin/forum"><i class="icon-comment"></i> Forum<span class="badge badge-info">10</span></a></li>
           <li <?php if ($item==6){ echo "class='active'";} ?>><a href="<?php echo base_url() ?>admin/addlevels"><i class="icon-user"></i>Add levels</a></li>
+          <li <?php if ($item==7){ echo "class='active'";} ?>><a href="<?php echo base_url() ?>admin/managelevels"><i class="icon-user"></i>Manage levels</a></li>
           <li class="divider"></li>
           <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
-          <li><a href="<?php echo base_url() ?>admin/logout"><i class="icon-share"></i> Logout</a></li>
+          <li><a href="<?php echo base_url() ?>auth/logout"><i class="icon-share"></i> Logout</a></li>
         </ul>
     </div>
 </div>

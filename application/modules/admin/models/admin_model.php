@@ -9,5 +9,10 @@ class Admin_model extends CI_Model {
 	{
 		$this->db->insert('levels', $array);
 	}
+	function get_levels()
+	{
+		$query = $this->db->get('levels');
+		return $query->result_array();
+	}
 	
 }
