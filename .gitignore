@@ -1,2 +1,4 @@
-application/config/
+application/config
 assets/images
+*/config
+*.~

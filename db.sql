@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 15, 2013 at 06:21 PM
+-- Generation Time: Oct 14, 2013 at 05:22 PM
 -- Server version: 5.5.24
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -38,6 +38,22 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fame`
+--
+
+CREATE TABLE IF NOT EXISTS `fame` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(200) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `levels`
 --
 
@@ -56,16 +72,7 @@ CREATE TABLE IF NOT EXISTS `levels` (
   `photo` varchar(100) NOT NULL,
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `level` (`level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `levels`
---
-
-INSERT INTO `levels` (`id`, `level`, `name`, `als`, `title`, `description`, `answer`, `cookie`, `javascript`, `stat`, `misc`, `photo`) VALUES
-(4, 1, '', NULL, 'simple', 'dxfgxdvxvv<br>jfh<br>', 'bb064b23223dff9b805313cdafc355acc64f1642', 's', 'sad', NULL, NULL, 'Screenshot from 2013-06-21 08:46:52.png'),
-(8, 3, 'next', NULL, 'Whoos', 'dfxv', '058baae9cf1000caeb9e952d0edeadb354ed197a', 's', 's', NULL, NULL, 'Screenshot from 2013-06-13 13:47:28.png'),
-(9, 2, 'chcs', NULL, 'fsf', 'answer is : answer<br>', '25dc282b5a3dcba62a9a777a856c65dd8a4ae8c4', 'd', 'd', NULL, NULL, 'Screenshot from 2013-06-04 10:29:59.png');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
@@ -79,14 +86,7 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
   `login` varchar(50) COLLATE utf8_bin NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `login_attempts`
---
-
-INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(5, '127.0.0.1', '9400113717', '2013-09-14 15:14:20');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=215 ;
 
 -- --------------------------------------------------------
 
@@ -112,15 +112,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `group_id` int(11) NOT NULL DEFAULT '300',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `activated`, `banned`, `ban_reason`, `new_password_key`, `new_password_requested`, `new_email`, `new_email_key`, `last_ip`, `last_login`, `created`, `modified`, `group_id`) VALUES
-(2, 'abvayad', '$P$BVlOBjBunRcH7.S7TpaaqKJzfqPpqz1', 'aboobackervyd@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '2013-09-15 17:51:08', '2013-09-13 15:31:49', '2013-09-15 12:21:08', 100),
-(3, 'tachyons', '$P$B33X8m2t419FWjyTh02HID2AJsIzgz.', 'tachyons@tachyons.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '2013-09-15 18:08:24', '2013-09-14 21:12:36', '2013-09-15 12:38:24', 300);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=183 ;
 
 -- --------------------------------------------------------
 
@@ -146,19 +138,29 @@ CREATE TABLE IF NOT EXISTS `user_autologin` (
 CREATE TABLE IF NOT EXISTS `user_profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `college` varchar(100) COLLATE utf8_bin NOT NULL,
+  `phone` bigint(12) NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `address` varchar(200) COLLATE utf8_bin NOT NULL,
   `country` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `website` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+  `email` varchar(100) COLLATE utf8_bin NOT NULL,
+  `passtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=172 ;
 
 --
--- Dumping data for table `user_profiles`
+-- Constraints for dumped tables
 --
 
-INSERT INTO `user_profiles` (`id`, `user_id`, `country`, `website`, `level`) VALUES
-(1, 2, NULL, NULL, 1),
-(2, 3, NULL, NULL, 3);
+--
+-- Constraints for table `user_profiles`
+--
+ALTER TABLE `user_profiles`
+  ADD CONSTRAINT `user_profiles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

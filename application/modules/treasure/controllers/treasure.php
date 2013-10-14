@@ -44,18 +44,7 @@ class Treasure extends MX_Controller {
 		$user_id=$this->tank_auth->get_user_id();
 		if($data['level']==25)
 		{
-			$array = array(
-					"user" => "$user",
-					"level" => "$level",
-				);
-			$this->treasure_model->increment_level($user_id,$level);
-			$this->treasure_model->setfame($array);
-			//$this->treasure_model->changeanswer($user);
-			$data['level']=$this->treasure_model->setfame($array);
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/mainnav', $data);
-			$this->load->view('winner',$data);
-			$this->load->view('templates/footer');
+			//code for final level
 		}
 		else if($data['level']>25)
 		{
