@@ -392,6 +392,22 @@ class Users extends CI_Model
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+	private function get_id_email($email)
+	{
+		$this->db->select('id');
+		$this->db->where('email', $email);
+		$this->db->limit(1);
+		$query = $this->db->get('users');
+		$row = $query->row(); 
+   		return $row->id;
+	}
+	function update_profile($pdata)
+	{
+		//print_r($pdata);
+		$userid=$this->get_id_email($pdata['email']);
+		$this->db->where('user_id', $userid);
+		$this->db->update('user_profiles', $pdata); 
+	}
 }
 
 /* End of file users.php */

@@ -5,7 +5,7 @@ class Home extends MX_Controller {
 	public function index()
 	{
 
-		$data['title'] = 'About treasure hunt';
+		$data['title'] = 'Queens crown, treasure hunt';
 		$data['page'] = 'home';
 		$this->lang->load('tank_auth');
 		$this->load->library('tank_auth_groups','','tank_auth');
@@ -22,7 +22,7 @@ class Home extends MX_Controller {
 		}
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/mainnav', $data);
-		$this->load->view('about');
+		$this->load->view('home');
 		$this->load->view('templates/footer');
 
 	}

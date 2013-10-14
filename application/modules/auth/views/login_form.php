@@ -41,9 +41,9 @@ $login = array(
 	'class' => 'input-block-level'
 );
 if ($login_by_username AND $login_by_email) {
-	$login_label = 'Email or login';
+	$login_label = 'Email or username';
 } else if ($login_by_username) {
-	$login_label = 'Login';
+	$login_label = 'username';
 } else {
 	$login_label = 'Email';
 }
@@ -70,6 +70,7 @@ $captcha = array(
 <div class="container"> 
 <?php 
 $attributes = array('class' => 'form-signin', 'id' => 'myform');
+$this->form_validation->set_error_delimiters('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>'); 
 echo form_open($this->uri->uri_string(),$attributes);?>
 <h2 class="form-signin-heading">Please sign in</h2>
 	<?php echo form_label($login_label, $login['id']); ?>
@@ -84,25 +85,15 @@ echo form_open($this->uri->uri_string(),$attributes);?>
 
 	<?php if ($show_captcha) {
 		if ($use_recaptcha) { ?>
-	<tr>
-		<td colspan="2">
-			<div id="recaptcha_image"></div>
-		</td>
-		<td>
-			<a href="javascript:Recaptcha.reload()">Get another CAPTCHA</a>
+	
+			<!-- <a href="javascript:Recaptcha.reload()">Get another CAPTCHA</a>
 			<div class="recaptcha_only_if_image"><a href="javascript:Recaptcha.switch_type('audio')">Get an audio CAPTCHA</a></div>
 			<div class="recaptcha_only_if_audio"><a href="javascript:Recaptcha.switch_type('image')">Get an image CAPTCHA</a></div>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<div class="recaptcha_only_if_image">Enter the words above</div>
 			<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
-		</td>
-		<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
-		<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
+			<input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /> -->
+		<?php echo form_error('recaptcha_response_field'); ?>
 		<?php echo $recaptcha_html; ?>
-	</tr>
 	<?php } else { ?>
 	
 		<p>Enter the code exactly as it appears:</p>
@@ -120,6 +111,6 @@ echo form_open($this->uri->uri_string(),$attributes);?>
 	<?php echo form_submit('submit','submit',$attributes); ?>
 	<br/>
 	<?php echo anchor('/auth/forgot_password/', 'Forgot password'); ?>
-	<?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register'); ?>
+	<?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'New user? Register here'); ?>
 </div>
 <?php echo form_close(); ?>

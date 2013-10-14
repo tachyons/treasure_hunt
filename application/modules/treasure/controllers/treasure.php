@@ -15,7 +15,7 @@ class Treasure extends MX_Controller {
 	public function index()
 	{
 
-		$data['title'] = 'Adwaita 2013 Treasure hunt';
+		$data['title'] = 'Queens crown, Lets play';
 		//$data['page'] = 'home';
 		$this->lang->load('tank_auth');
 		$this->load->library('tank_auth_groups','','tank_auth');
@@ -38,39 +38,77 @@ class Treasure extends MX_Controller {
 		}
 		$data['level']=$this->treasure_model->get_user_level($data['user_id']);
 		$data['question']=$this->treasure_model->get_question($data['level']);
-		if($_POST)
+
+		$level=$this->treasure_model->get_user_level($data['user_id']);;
+		$user=$this->tank_auth->get_username();
+		$user_id=$this->tank_auth->get_user_id();
+		if($data['level']==25)
 		{
-		    $this->form_validation->set_rules('answer', 'Answer', 'trim|required|xss_clean');
-		    $this->form_validation->set_error_delimiters('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>');
-		    if($this->form_validation->run() == FALSE)
-		   	{
-		     	//Field validation failed.  
-		     	$this->load->view('templates/header', $data);
-				$this->load->view('templates/mainnav', $data);
-				$this->load->view('treasure');
-				$this->load->view('templates/footer');
-			}
-			else
-			{
-				$answer=sha1($this->input->post('answer'));
-				if($this->treasure_model->check_answer($answer,$data['level']))
-				{
-					$this->treasure_model->increment_level($data['user_id'],$data['level']);
-				}
-			}
-			redirect('treasure');
+			$array = array(
+					"user" => "$user",
+					"level" => "$level",
+				);
+			$this->treasure_model->increment_level($user_id,$level);
+			$this->treasure_model->setfame($array);
+			//$this->treasure_model->changeanswer($user);
+			$data['level']=$this->treasure_model->setfame($array);
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/mainnav', $data);
+			$this->load->view('winner',$data);
+			$this->load->view('templates/footer');
 		}
-		else
+		else if($data['level']>25)
 		{
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/mainnav', $data);
-			$this->load->view('treasure');
+			$this->load->view('winner',$data);
 			$this->load->view('templates/footer');
+		}
+		else if($data['level']<25)
+		{
+			if($_POST)
+			{
+			    $this->form_validation->set_rules('answer', 'Answer', 'trim|required|xss_clean');
+			    $this->form_validation->set_error_delimiters('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>');
+			    if($this->form_validation->run() == FALSE)
+			   	{
+			     	//Field validation failed.  
+			     	$this->load->view('templates/header', $data);
+					$this->load->view('templates/mainnav', $data);
+					$this->load->view('treasure');
+					$this->load->view('templates/footer');
+				}
+				else
+				{
+					$answer=sha1($this->input->post('answer'));
+					if($this->treasure_model->check_answer($answer,$data['level']))
+					{
+						$this->treasure_model->increment_level($data['user_id'],$data['level']);
+						$data['status']='true';
+					}
+					else
+					{
+						$data['status']='false';
+					}
+					$this->load->view('templates/header', $data);
+					$this->load->view('templates/mainnav', $data);
+					$this->load->view('treasure',$data);
+					$this->load->view('templates/footer');
+				}
+				
+			}
+			else
+			{
+				$this->load->view('templates/header', $data);
+				$this->load->view('templates/mainnav', $data);
+				$this->load->view('treasure',$data);
+				$this->load->view('templates/footer');
+			}
 		}	
 	}
 	function leaderboard()
 	{
-		$data['title'] = 'Adwaita 2013 Treasure hunt';
+		$data['title'] = 'Leaderboard Queens crown';
 		//$data['page'] = 'home';
 		$this->lang->load('tank_auth');
 		$this->load->library('tank_auth_groups','','tank_auth');

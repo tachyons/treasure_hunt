@@ -16,7 +16,8 @@
 				<td><?php echo $level['level'];?> </td>
 				<td><?php echo $level['name'];?> </td>
 				<td><?php echo $level['title'];?> </td>
-				<td><a href="#editwindow" role="button" class="btn" data-toggle="modal">Edit</a></td>
+				<!-- <td><a href="#editwindow" role="button" class="btn" data-toggle="modal">Edit</a></td> -->
+				<td><a href="editlevel/<?php echo $level['level'];?>" role="button" class="btn" >Edit</a></td>
 			</tr>
 			<?php endforeach ?>
 		</table>

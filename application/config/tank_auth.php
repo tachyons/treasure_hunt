@@ -7,7 +7,7 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['website_name'] = 'Adwaita Treasure Hunt';
+$config['website_name'] = 'Adwaitha Treasure Hunt';
 $config['webmaster_email'] = 'aboobackervyd@gmail.com';
 
 /*
@@ -74,7 +74,7 @@ $config['login_record_ip'] = TRUE;
 $config['login_record_time'] = TRUE;
 $config['login_count_attempts'] = TRUE;
 $config['login_max_attempts'] = 5;
-$config['login_attempt_expire'] = 60*60*24;
+$config['login_attempt_expire'] = 60*60*24*7;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,8 +127,8 @@ $config['captcha_case_sensitive'] = TRUE;
 |--------------------------------------------------------------------------
 */
 $config['use_recaptcha'] = FALSE;
-$config['recaptcha_public_key'] = '';
-$config['recaptcha_private_key'] = '';
+$config['recaptcha_public_key'] = '6LfuhucSAAAAAAmmXhJrjEY9Imht-AzcCCdqahzs';
+$config['recaptcha_private_key'] = '6LfuhucSAAAAALFU77BEqoHL3k5T32j9dc2qhd4F';
 
 /*
 |--------------------------------------------------------------------------

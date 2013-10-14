@@ -19,7 +19,7 @@ class Treasure_model extends CI_Model {
 	}
 	function get_question($level)
 	{
-		$this->db->select('title,description,photo');
+		$this->db->select('title,description,photo,level');
 		$this->db->where('level', $level+1);
 		$query = $this->db->get('levels');
 		$result=$query->result_array(); 
@@ -49,5 +49,21 @@ class Treasure_model extends CI_Model {
 
 		$this->db->where('user_id', $user_id);
 		$this->db->update('user_profiles', $data); 
+	}
+	function setfame($array)
+	{
+		if($this->db->insert('fame', $array))
+		{
+			return TRUE;
+		}
+	}
+	function changeanswer($user)
+	{
+		$data = array(
+               'answer' => sha1($user),
+            );
+
+		$this->db->where('level', 25);
+		$this->db->update('levels', $data);
 	}
 }

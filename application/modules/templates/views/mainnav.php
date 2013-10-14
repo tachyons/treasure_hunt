@@ -13,21 +13,19 @@
 		        	<span class="icon-bar"></span>
 		        	<span class="icon-bar"></span>
 		      </button>
-		      <a class="brand" href="<?php echo base_url() ?>home"><i class="fa-icon-beaker"></i>Treasure Hunt</a>
+		      <a class="brand" href="<?php echo base_url() ?>home"><i class="fa-icon-beaker"></i>Queen's Crown</a>
 				<!--mobile nav icon (hidden:CSS)-->
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
-					menu
-				</a><!--end btn-navbar-->
-				<div class="nav-collapse">
+ 				<!-- a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> </a> --><!--end btn-navbar
+ -->				<div class="nav-collapse">
 					<ul class="nav">
 						<li <?php if($page=="home"){echo 'class="active"';}?>>
 							<a href="<?php echo base_url() ?>home">Home</a>
 						</li>
+						<li <?php if($page=="rules"){echo 'class="active"';}?>>
+							<a href="<?php echo base_url() ?>rules">Rules</a>
+						</li>
 						<li <?php if($page=="about"){echo 'class="active"';}?>>
 							<a href="<?php echo base_url() ?>about">About Us</a>
-						</li>
-						<li <?php if($page=="contact"){echo 'class="active"';}?>>
-							<a href="<?php echo base_url() ?>contact">Contact Us</a>
 						</li>
 					</ul>
 					<ul class="nav pull-right">

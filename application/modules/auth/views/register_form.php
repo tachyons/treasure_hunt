@@ -6,7 +6,7 @@
       }
 
       .form-signup {
-        max-width: 430px;
+        max-width: 460px;
         padding: 19px 29px 29px;
         margin: 0 auto 20px;
         background-color: #fff;
@@ -82,7 +82,19 @@ $phone = array(
 $regform= array(
 	'class' => 'form-horizontal form-signup', 
 	'id' => 'regform');
-
+$college = array(
+	'name'	=> 'college',
+	'id'	=> 'college',
+	'value' => set_value('college'),
+	'maxlength'	=> '150',
+);
+$name = array(
+	'name'	=> 'name',
+	'id'	=> 'name',
+	'value' => set_value('name'),
+	'maxlength'	=> 50,
+);
+	
 ?>
 <?php $this->form_validation->set_error_delimiters('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>'); ?>
 <?php echo form_open($this->uri->uri_string(),$regform); ?>
@@ -91,6 +103,12 @@ $regform= array(
 		<?php $this->form_builder->text($username['id'], 'User name',$username['value']); ?>
 		<?php echo form_error($username['name']); ?><?php echo isset($errors[$username['name']])?$errors[$username['name']]:''; ?>
 	<?php } ?>
+	<!-- full  name -->
+	<?php $this->form_builder->text($name['id'], 'Full name',$name['value']); ?>
+	<?php echo form_error($name['name']); ?><?php echo isset($errors[$name['name']])?$errors[$name['name']]:''; ?>
+	<!-- college -->
+	<?php $this->form_builder->text($college['id'], 'College',$college['value']); ?>
+	<?php echo form_error($college['name']); ?><?php echo isset($errors[$college['name']])?$errors[$college['name']]:''; ?>
 	<!-- email -->
 	<?php $this->form_builder->text($email['id'], 'Email',$email['value']); ?>
 	<?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?>
@@ -107,25 +125,18 @@ $regform= array(
 	<?php echo form_error($address['name']); ?><?php echo isset($errors[$address['name']])?$errors[$address['name']]:''; ?>
 	<?php if ($captcha_registration) {
 		if ($use_recaptcha) { ?>
-	<tr>
-		<td colspan="2">
-			<div id="recaptcha_image"></div>
-		</td>
-		<td>
-			<a href="javascript:Recaptcha.reload()">Get another CAPTCHA</a>
-			<div class="recaptcha_only_if_image"><a href="javascript:Recaptcha.switch_type('audio')">Get an audio CAPTCHA</a></div>
-			<div class="recaptcha_only_if_audio"><a href="javascript:Recaptcha.switch_type('image')">Get an image CAPTCHA</a></div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="recaptcha_only_if_image">Enter the words above</div>
-			<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
-		</td>
-		<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
-		<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
-		<?php echo $recaptcha_html; ?>
-	</tr>
+		 			<!-- <a href="javascript:Recaptcha.reload()">Get another CAPTCHA</a>
+					<div id="recaptcha_image"></div>
+					<div class="recaptcha_only_if_image"><a href="javascript:Recaptcha.switch_type('audio')">Get an audio CAPTCHA</a></div>
+					<div class="recaptcha_only_if_audio"><a href="javascript:Recaptcha.switch_type('image')">Get an image CAPTCHA</a></div>
+					<div class="recaptcha_only_if_image">Enter the words above</div>
+					<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
+					<input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /> -->
+			<div class="control-group">
+				<?php echo form_error('recaptcha_response_field'); ?>
+				<div class="controls">	
+					<?php echo $recaptcha_html; ?>
+				</div>
 	<?php } else { ?>
 		 <div class="control-group">
 		 	<label class="control-label" >Enter the code exactly as it appears:</label>

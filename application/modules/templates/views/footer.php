@@ -4,59 +4,12 @@
 	</div>
 	<footer>
 		<div class="container">
-			<div class="row-fluid">
-			  <div class="span3">
-				<h4 class="line3 center standart-h4title"><span>Navigation</span></h4>
-				<ul class="footer-links">
-				  <li><a href="#">Home</a></li>
-				  <li><a href="#">project</a></li>
-				  <li><a href="#">Elements</a></li>
-				  <li><a href="#">Contact</a></li>
-				  <li><a href="#">Blog</a></li>
-				</ul>
-			  </div>
-			  
-			<div class="span3">
-				<h4 class="line3 center standart-h4title"><span>Useful Links</span></h4>
-				<ul class="footer-links">
-				  <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				  <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				 <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				 <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				</ul>
-			</div> 
-			  
-			<div class="span3">
-				<h4 class="line3 center standart-h4title"><span>Useful Links</span></h4>
-				<ul class="footer-links">
-				  <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				  <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				<li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				 <li><a href="http://www.tachyons.tk">tachyons.tk</a></li>
-				</ul>
-			</div>
-	
-			<div class="span3">
-				<h4 class="line3 center standart-h4title"><span>Our office</span></h4>
-				<address>
-					<strong>IEEE Student branch</strong><br>
-					<i class="fa-icon-map-marker"></i>College of Engineering Trikaripur
-					<br>
-					kasargod,kerala<br>
-					<i class="fa-icon-phone-sign"></i> + 91 9400113717
-		
-				</address>
-			</div>
-		  
-		</div>
 		<hr>
-		    <p>© tachyons creations 2013</p>
-	  </div><!-- CONTAINER FOOTER-->
+		<div class="fb-like" data-href="http://www.facebook.com/queenscrown" data-width="450" data-show-faces="true" data-send="true"></div>
+			<p>Created by <a href="https://www.facebook.com/pages/Tachyons-creations/238653409487831">tachyons creations </a></p>
+	  	</div><!-- CONTAINER FOOTER-->
 	  
 	</footer>
-
-
-		</div>
 		<!-- /end WRAPPER-->
     	<!-- Le javascript
     	================================================== -->
@@ -70,8 +23,15 @@
         	$('#description').wysihtml5();
     	});
     	</script>
-		
-            
-    </script>
+    	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=319318531547286";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>    
+    
 	</body>
 </html>

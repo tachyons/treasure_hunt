@@ -14,5 +14,16 @@ class Admin_model extends CI_Model {
 		$query = $this->db->get('levels');
 		return $query->result_array();
 	}
+	function get_level_data($level)
+	{
+		$this->db->where('level', $level); 
+		$query = $this->db->get('levels');
+		return $query->row_array();
+	}
+	function edit_level($level,$array)
+	{
+		$this->db->where('level', $level);
+		$this->db->update('levels', $array); 
+	}
 	
 }

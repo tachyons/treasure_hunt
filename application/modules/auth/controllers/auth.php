@@ -11,6 +11,7 @@ class Auth extends CI_Controller
 		$this->load->library('tank_auth_groups','','tank_auth');
 		$this->lang->load('tank_auth');
 		$this->load->library('form_builder');
+		$this->load->model('users');
 	}
 
 	function index()
@@ -147,7 +148,11 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
-
+			/* extra fields*/
+			$this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('college', 'College', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('phone', 'Phone number', 'trim|required|xss_clean');
 			$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
 			$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
 			if ($captcha_registration) {
@@ -158,7 +163,6 @@ class Auth extends CI_Controller
 				}
 			}
 			$data['errors'] = array();
-
 			$email_activation = $this->config->item('email_activation', 'tank_auth');
 
 			if ($this->form_validation->run()) {								// validation ok
@@ -166,8 +170,18 @@ class Auth extends CI_Controller
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
-						$email_activation))) {									// success
-
+						$email_activation))) {								// success
+						$name=$this->form_validation->set_value('name');
+						$phone=$this->form_validation->set_value('phone');
+						$college=$this->form_validation->set_value('college');
+						$address=$this->form_validation->set_value('address');
+						$email=$this->form_validation->set_value('email');
+						$pdata = array('name' => $name,
+										'email'=>$email,
+										'phone'=> $phone,
+										'college'=>$college,
+										'address'=>$address);
+						$this->users->update_profile($pdata);
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
 					if ($email_activation) {									// send "activate" email
@@ -313,7 +327,22 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$data['title'] = 'Change password';
+			if ($this->tank_auth->is_logged_in()) {									// logged in
+				$data['user_id']=$this->tank_auth->get_user_id();
+				$data['user_name']=$this->tank_auth->get_username();
+				$data['is_logged_in']=TRUE;
+
+			} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+				redirect('/auth/send_again/');
+
+			} else {
+				$data['is_logged_in']=FALSE;
+			}
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/mainnav', $data);
 			$this->load->view('auth/forgot_password_form', $data);
+			$this->load->view('templates/footer', $data);
 		}
 	}
 
@@ -390,7 +419,22 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$data['title'] = 'Sign in';
+			if ($this->tank_auth->is_logged_in()) {									// logged in
+				$data['user_id']=$this->tank_auth->get_user_id();
+				$data['user_name']=$this->tank_auth->get_username();
+				$data['is_logged_in']=TRUE;
+
+			} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+				redirect('/auth/send_again/');
+
+			} else {
+				$data['is_logged_in']=FALSE;
+			}
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/mainnav', $data);
 			$this->load->view('auth/change_password_form', $data);
+			$this->load->view('templates/footer', $data);
 		}
 	}
 
@@ -580,7 +624,7 @@ class Auth extends CI_Controller
 		$this->load->helper('recaptcha');
 
 		// Add custom theme so we can get only image
-		$options = "<script>var RecaptchaOptions = {theme: 'custom', custom_theme_widget: 'recaptcha_widget'};</script>\n";
+		$options = "<script>var RecaptchaOptions = {theme: 'red', custom_theme_widget: 'recaptcha_widget'};</script>\n";
 
 		// Get reCAPTCHA JS and non-JS HTML
 		$html = recaptcha_get_html($this->config->item('recaptcha_public_key', 'tank_auth'));

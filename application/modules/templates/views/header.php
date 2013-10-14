@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/font-awesome.min.css">
-    <!-- <script src="<?php //echo base_url() ?>assets/js/jquery-migrate-1.2.1.js"></script>	   -->
-    <script src="<?php echo base_url() ?>assets/js/jquery-migrate-1.2.1.min.js"></script> 	
     <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
     <?php if(!isset($description))
     {
